@@ -1,0 +1,31 @@
+{
+  "name": "frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Anthony Mouallem <mouallemanthony@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "satellizer": "^0.15.5",
+    "angular-ui-router": "^0.4.2",
+    "jquery-ui": "^1.12.1",
+    "oclazyload": "^1.1.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap-datepicker": "^1.6.4",
+    "angular-filter": "^0.5.16"
+  },
+  "resolutions": {
+    "angular": "^1.6.4"
+  }
+}

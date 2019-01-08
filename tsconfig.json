@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs" : true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "baseUrl": "./",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "ang4-image-upload": [
+        "dist/ang4-image-upload"
+      ],
+      "ang4-image-upload/*": [
+        "dist/ang4-image-upload/*"
+      ]
+    }
+  }
+}

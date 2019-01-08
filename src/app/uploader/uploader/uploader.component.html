@@ -1,0 +1,16 @@
+<input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" #fileInput>
+<button id="uploadBtn{{id!==undefined?id:''}}" (click)="fileInput.click()">{{buttonText}}</button>
+<div class="imageContainer" *ngIf="showImagesOnAdd">
+  <img
+  (click)="removeImage(v)"
+  *ngFor="let image of images; let v=index"                                 
+  style="max-width:100px" [src]="image" alt="noImg">
+</div>
+
+<!-- (drop)="sortImages($event)"
+
+id="drag{{v}}"
+draggable="true" 
+(dragstart)="checkPos($event, v)" 
+(dragenter)="opacitize(v, '0.4')"
+(dragleave)="opacitize(v, '1')"  -->
