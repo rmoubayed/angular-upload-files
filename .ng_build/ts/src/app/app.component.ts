@@ -19,6 +19,7 @@ import { UploadService } from './uploader/uploader/upload.service';
     [usingImages]="true"
     [showImagesOnAdd]="true"
     [imageWidth]="'180px'"
+    [imagesRemovable]="true"
     [uploadParams]="uploadParams"
     ></app-uploader>
   `,
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit {
   }
   readFiles(event) {
     console.log(event);
-    this.uploadService.startUpload.next(event.files);
+    // this.uploadService.startUpload.next(event.files);
     this.uploadService.currentUploadProgress.subscribe(
       (progress)=>{
         console.log(progress);

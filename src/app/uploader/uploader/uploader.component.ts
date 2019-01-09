@@ -128,11 +128,13 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.files.splice(index, 1);
       this.images.splice(index, 1);
       this.onImageRemoved.emit();
+      (<HTMLInputElement>document.getElementById('fileInput')).value = "";
     }
   }
   removeFile(index) {
     this.files.splice(index, 1);
     this.onFileRemoved.emit();
+    (<HTMLInputElement>document.getElementById('fileInput')).value = "";
   }
   clearFiles() {
     this.files = <File[]>[];

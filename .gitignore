@@ -1,2 +1,7 @@
 ./node_modules
 node_modules
+.ng-build
+./.ng-build
+/dist
+dist
+./dist

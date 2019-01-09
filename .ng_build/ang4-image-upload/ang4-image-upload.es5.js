@@ -1,22 +1,20 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('@angular/common/http'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/Subject', '@angular/common/http', '@angular/common'], factory) :
-	(factory((global['angular-upload-files'] = {}),global.ng.core,global.Rx,global.ng.common.http,global.ng.common));
-}(this, (function (exports,core,Subject,http,common) { 'use strict';
-
+import { Component, EventEmitter, Injectable, Input, NgModule, Output } from '@angular/core';
+import { Subject as Subject$1 } from 'rxjs/Subject';
+import { HttpClient, HttpEventType, HttpParams } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 var UploadService = (function () {
     function UploadService() {
-        this.startUpload = new Subject.Subject();
-        this.currentUploadProgress = new Subject.Subject();
-        this.clearImages = new Subject.Subject();
-        this.clearFiles = new Subject.Subject();
-        this.removeFile = new Subject.Subject();
-        this.removeImage = new Subject.Subject();
+        this.startUpload = new Subject$1();
+        this.currentUploadProgress = new Subject$1();
+        this.clearImages = new Subject$1();
+        this.clearFiles = new Subject$1();
+        this.removeFile = new Subject$1();
+        this.removeImage = new Subject$1();
     }
     return UploadService;
 }());
 UploadService.decorators = [
-    { type: core.Injectable },
+    { type: Injectable },
 ];
 /**
  * @nocollapse
@@ -31,10 +29,10 @@ var UploaderComponent = (function () {
         this.http = http$$1;
         this.uploadService = uploadService;
         this.buttonText = 'Choose File';
-        this.onFilesSelected = new core.EventEmitter();
-        this.onUploadComplete = new core.EventEmitter();
-        this.onImageRemoved = new core.EventEmitter();
-        this.onFileRemoved = new core.EventEmitter();
+        this.onFilesSelected = new EventEmitter();
+        this.onUploadComplete = new EventEmitter();
+        this.onImageRemoved = new EventEmitter();
+        this.onFileRemoved = new EventEmitter();
         this.images = [];
         this.files = [];
         this.subscriptions = [];
@@ -120,17 +118,17 @@ var UploaderComponent = (function () {
         var _this = this;
         var /** @type {?} */ fd = new FormData();
         fd.append(this.uploadParams.formDataPropertyName, file, file.name);
-        var /** @type {?} */ params = new http.HttpParams();
+        var /** @type {?} */ params = new HttpParams();
         this.uploadParams.extraParams.forEach(function (param) {
             params = params.set(param.paramName, (param.paramValueIsFromFile ? file[param.paramValue] : param.paramValue));
         });
         this.http.post(this.postUrl, fd, { params: params, reportProgress: true, observe: 'events' })
             .subscribe(function (event) {
-            if (event.type === http.HttpEventType.UploadProgress) {
+            if (event.type === HttpEventType.UploadProgress) {
                 // console.log('Upload Progress:', Math.round(event.loaded / event.total*100)+'%' );
                 _this.uploadService.currentUploadProgress.next((event.loaded / event.total * 100));
             }
-            else if (event.type === http.HttpEventType.Response) {
+            else if (event.type === HttpEventType.Response) {
                 // console.log('Response: ', event);
                 _this.onUploadComplete.emit({ response: event, file: file });
             }
@@ -145,6 +143,7 @@ var UploaderComponent = (function () {
             this.files.splice(index, 1);
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
+            ((document.getElementById('fileInput'))).value = "";
         }
     };
     /**
@@ -154,6 +153,7 @@ var UploaderComponent = (function () {
     UploaderComponent.prototype.removeFile = function (index) {
         this.files.splice(index, 1);
         this.onFileRemoved.emit();
+        ((document.getElementById('fileInput'))).value = "";
     };
     /**
      * @return {?}
@@ -242,9 +242,9 @@ var UploaderComponent = (function () {
     return UploaderComponent;
 }());
 UploaderComponent.decorators = [
-    { type: core.Component, args: [{
+    { type: Component, args: [{
                 selector: 'app-uploader',
-                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
+                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" id=\"fileInput\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
                 styles: ["\n    .imageContainer {\n        display: block;\n    }\n  "]
             },] },
 ];
@@ -252,24 +252,24 @@ UploaderComponent.decorators = [
  * @nocollapse
  */
 UploaderComponent.ctorParameters = function () { return [
-    { type: http.HttpClient, },
+    { type: HttpClient, },
     { type: UploadService, },
 ]; };
 UploaderComponent.propDecorators = {
-    'buttonText': [{ type: core.Input },],
-    'postUrl': [{ type: core.Input },],
-    'imagesRemovable': [{ type: core.Input },],
-    'usingImages': [{ type: core.Input },],
-    'buttonClass': [{ type: core.Input },],
-    'imageWidth': [{ type: core.Input },],
-    'multiple': [{ type: core.Input },],
-    'showImagesOnAdd': [{ type: core.Input },],
-    'id': [{ type: core.Input },],
-    'uploadParams': [{ type: core.Input },],
-    'onFilesSelected': [{ type: core.Output },],
-    'onUploadComplete': [{ type: core.Output },],
-    'onImageRemoved': [{ type: core.Output },],
-    'onFileRemoved': [{ type: core.Output },],
+    'buttonText': [{ type: Input },],
+    'postUrl': [{ type: Input },],
+    'imagesRemovable': [{ type: Input },],
+    'usingImages': [{ type: Input },],
+    'buttonClass': [{ type: Input },],
+    'imageWidth': [{ type: Input },],
+    'multiple': [{ type: Input },],
+    'showImagesOnAdd': [{ type: Input },],
+    'id': [{ type: Input },],
+    'uploadParams': [{ type: Input },],
+    'onFilesSelected': [{ type: Output },],
+    'onUploadComplete': [{ type: Output },],
+    'onImageRemoved': [{ type: Output },],
+    'onFileRemoved': [{ type: Output },],
 };
 var UploaderModule = (function () {
     function UploaderModule() {
@@ -290,9 +290,9 @@ var UploaderModule = (function () {
     return UploaderModule;
 }());
 UploaderModule.decorators = [
-    { type: core.NgModule, args: [{
+    { type: NgModule, args: [{
                 imports: [
-                    common.CommonModule
+                    CommonModule
                 ],
                 declarations: [
                     UploaderComponent,
@@ -306,12 +306,8 @@ UploaderModule.decorators = [
  * @nocollapse
  */
 UploaderModule.ctorParameters = function () { return []; };
-
-exports.UploaderModule = UploaderModule;
-exports.UploadService = UploadService;
-exports.ɵa = UploaderComponent;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-//# sourceMappingURL=angular-upload-files.umd.js.map
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { UploaderModule, UploadService, UploaderComponent as ɵa };
+//# sourceMappingURL=ang4-image-upload.es5.js.map

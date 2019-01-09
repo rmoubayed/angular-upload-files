@@ -15,7 +15,7 @@ export interface ExtraParams {
 @Component({
   selector: 'app-uploader',
   template: `
-    <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" #fileInput>
+    <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" id="fileInput" #fileInput>
     <button id="uploadBtn{{id!==undefined?id:''}}" (click)="fileInput.click()">{{buttonText}}</button>
     <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img
@@ -142,11 +142,13 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.files.splice(index, 1);
       this.images.splice(index, 1);
       this.onImageRemoved.emit();
+      (<HTMLInputElement>document.getElementById('fileInput')).value = "";
     }
   }
   removeFile(index) {
     this.files.splice(index, 1);
     this.onFileRemoved.emit();
+    (<HTMLInputElement>document.getElementById('fileInput')).value = "";
   }
   clearFiles() {
     this.files = <File[]>[];

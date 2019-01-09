@@ -6,7 +6,7 @@ An angular module for file uploads. Works great with images.
 
 Currently Tested on Angular 4, Compatibility will be updated soon for other versions.
 
-DEMO IN THE WORKS
+NO LONGER BEING MAINTAINED! I CHANGED THE PACKAGE NAME TO [angular-upload-files](https://www.npmjs.com/package/angular-upload-files)
 
 # How To Use
 
@@ -97,7 +97,7 @@ example:
 | postUrl: string | Uploader target url |
 | usingImages: boolean |  Set to true if images (and only images) are being uploaded. |
 | showImagesOnAdd: boolean | If usingImages is set to true, images will show in the DOM on add  |
-| showImagesOnAddWidth: string | CSS width value. like: "180px"  |
+| imageWidth: string | CSS width value. like: "180px"  |
 | imagesRemovable: boolean | Images will be removed on click  |
 
 

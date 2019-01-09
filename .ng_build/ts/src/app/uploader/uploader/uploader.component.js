@@ -123,6 +123,7 @@ export class UploaderComponent {
             this.files.splice(index, 1);
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
+            ((document.getElementById('fileInput'))).value = "";
         }
     }
     /**
@@ -132,6 +133,7 @@ export class UploaderComponent {
     removeFile(index) {
         this.files.splice(index, 1);
         this.onFileRemoved.emit();
+        ((document.getElementById('fileInput'))).value = "";
     }
     /**
      * @return {?}
@@ -222,7 +224,7 @@ UploaderComponent.decorators = [
     { type: Component, args: [{
                 selector: 'app-uploader',
                 template: `
-    <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" #fileInput>
+    <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" id="fileInput" #fileInput>
     <button id="uploadBtn{{id!==undefined?id:''}}" (click)="fileInput.click()">{{buttonText}}</button>
     <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img

@@ -1,8 +1,8 @@
 {
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
-    "flatModuleId": "angular-upload-files",
-    "flatModuleOutFile": "angular-upload-files.js",
+    "flatModuleId": "ang4-image-upload",
+    "flatModuleOutFile": "ang4-image-upload.js",
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true
   },

@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('@angular/common/http'), require('@angular/common')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', 'rxjs/Subject', '@angular/common/http', '@angular/common'], factory) :
-	(factory((global['angular-upload-files'] = {}),global.ng.core,global.Rx,global.ng.common.http,global.ng.common));
+	(factory((global['ang4-image-upload'] = {}),global.ng.core,global.Rx,global.ng.common.http,global.ng.common));
 }(this, (function (exports,core,Subject,http,common) { 'use strict';
 
 var UploadService = (function () {
@@ -145,6 +145,7 @@ var UploaderComponent = (function () {
             this.files.splice(index, 1);
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
+            ((document.getElementById('fileInput'))).value = "";
         }
     };
     /**
@@ -154,6 +155,7 @@ var UploaderComponent = (function () {
     UploaderComponent.prototype.removeFile = function (index) {
         this.files.splice(index, 1);
         this.onFileRemoved.emit();
+        ((document.getElementById('fileInput'))).value = "";
     };
     /**
      * @return {?}
@@ -244,7 +246,7 @@ var UploaderComponent = (function () {
 UploaderComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'app-uploader',
-                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
+                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" id=\"fileInput\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
                 styles: ["\n    .imageContainer {\n        display: block;\n    }\n  "]
             },] },
 ];
@@ -314,4 +316,4 @@ exports.ɵa = UploaderComponent;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=angular-upload-files.umd.js.map
+//# sourceMappingURL=ang4-image-upload.umd.js.map
