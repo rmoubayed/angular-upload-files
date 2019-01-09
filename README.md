@@ -6,7 +6,7 @@ An angular module for file uploads. Works great with images.
 
 Currently Tested on Angular 4, Compatibility will be updated soon for other versions.
 
-<----> DEMO IN THE WORKS <-------->
+DEMO IN THE WORKS
 
 #How To Use
 
