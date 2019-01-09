@@ -3,27 +3,13 @@
 <app-uploader
 (onFilesSelected)="readFiles($event)"
 (onUploadComplete)="uploadDone($event)"
-[buttonText]="'Choose Front Image'"
+[buttonText]="'Choose Image'"
 [buttonClass]="'btn btn-default'"
-[postUrl]="'http://127.0.0.1:1334/lotus/product'"
+[postUrl]="'https://api.imgur.com/3/image'"
 [id]="0"
-></app-uploader>
-
-<app-uploader
-(onFilesSelected)="readFiles($event)"
-(onUploadComplete)="uploadDone($event)"
-[buttonText]="'Choose Front Image'"
-[buttonClass]="'btn btn-default'"
-[postUrl]="'http://127.0.0.1:1334/lotus/product'"
-[id]="1"
-></app-uploader>
-
-
-<app-uploader
-(onFilesSelected)="readFiles($event)"
-(onUploadComplete)="uploadDone($event)"
-[buttonText]="'Choose Front Image'"
-[buttonClass]="'btn btn-default'"
-[postUrl]="'http://127.0.0.1:1334/lotus/product'"
-[id]="2"
+[multiple]="true"
+[usingImages]="true"
+[showImagesOnAdd]="true"
+[imageWidth]="'180px'"
+[uploadParams]="uploadParams"
 ></app-uploader>

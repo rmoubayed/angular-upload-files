@@ -1,6 +1,6 @@
 {
   "name": "angular-upload-files",
-  "version": "1.1.1",
+  "version": "1.1.20",
   "description": "",
   "main": "bundles/angular-upload-files.umd.js",
   "scripts": {
@@ -63,6 +63,10 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
     "typescript": "^2.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmoubayed/angular-upload-files"
   },
   "module": "angular-upload-files/angular-upload-files.es5.js",
   "es2015": "angular-upload-files/angular-upload-files.js",
