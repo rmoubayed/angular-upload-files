@@ -18,6 +18,7 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     imagesRemovable: boolean;
     usingImages: boolean;
     buttonClass: string;
+    imageWidth: string;
     multiple: boolean;
     showImagesOnAdd: boolean;
     id: number;
@@ -40,5 +41,9 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     removeFile(index: any): void;
     clearFiles(): void;
     addButtonStyle(className: string): void;
+    sortImages(event: any): void;
+    checkPos(event: any, index: any): void;
+    opacitize(index: any, opacity: any): void;
+    resetOpacity(): void;
     ngOnDestroy(): void;
 }

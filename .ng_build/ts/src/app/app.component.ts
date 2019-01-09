@@ -1,3 +1,4 @@
+import { UploadParams } from './../../.ng_build/ts/src/app/uploader/uploader/uploader.component.d';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UploadService } from './uploader/uploader/upload.service';
@@ -10,29 +11,15 @@ import { UploadService } from './uploader/uploader/upload.service';
     <app-uploader
     (onFilesSelected)="readFiles($event)"
     (onUploadComplete)="uploadDone($event)"
-    [buttonText]="'Choose Front Image'"
+    [buttonText]="'Choose Image'"
     [buttonClass]="'btn btn-default'"
-    [postUrl]="'http://127.0.0.1:1334/lotus/product'"
+    [postUrl]="'https://api.imgur.com/3/image'"
     [id]="0"
-    ></app-uploader>
-
-    <app-uploader
-    (onFilesSelected)="readFiles($event)"
-    (onUploadComplete)="uploadDone($event)"
-    [buttonText]="'Choose Front Image'"
-    [buttonClass]="'btn btn-default'"
-    [postUrl]="'http://127.0.0.1:1334/lotus/product'"
-    [id]="1"
-    ></app-uploader>
-
-
-    <app-uploader
-    (onFilesSelected)="readFiles($event)"
-    (onUploadComplete)="uploadDone($event)"
-    [buttonText]="'Choose Front Image'"
-    [buttonClass]="'btn btn-default'"
-    [postUrl]="'http://127.0.0.1:1334/lotus/product'"
-    [id]="2"
+    [multiple]="true"
+    [usingImages]="true"
+    [showImagesOnAdd]="true"
+    [imageWidth]="'180px'"
+    [uploadParams]="uploadParams"
     ></app-uploader>
   `,
   styles: [`
@@ -40,16 +27,23 @@ import { UploadService } from './uploader/uploader/upload.service';
   `]
 })
 export class AppComponent implements OnInit {
-
+  uploadParams : UploadParams;
   constructor(private router: Router, private uploadService : UploadService) {
 
   }
   ngOnInit() {
-
+    this.uploadParams = {
+      formDataPropertyName: 'image', 
+      extraParams: [{
+        paramValueIsFromFile: true,
+        paramValue: "name",
+        paramName: "filename"
+      }]
+    }
   }
   readFiles(event) {
     console.log(event);
-    this.uploadService.startUpload.next(event);
+    this.uploadService.startUpload.next(event.files);
     this.uploadService.currentUploadProgress.subscribe(
       (progress)=>{
         console.log(progress);

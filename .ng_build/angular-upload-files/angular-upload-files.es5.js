@@ -180,6 +180,58 @@ var UploaderComponent = (function () {
         }
     };
     /**
+     * @param {?} event
+     * @return {?}
+     */
+    UploaderComponent.prototype.sortImages = function (event) {
+        // alert();
+        console.log(event);
+        // let targetId = event.toElement.id;
+        // if(targetId.includes('drag')) {
+        //   let targetIndex = +targetId.replace('drag', '');
+        //   let temp = this.images[targetIndex];
+        //   this.images[targetIndex] = this.images[this.currentSourceImageIndex];
+        //   this.images[this.currentSourceImageIndex] = temp;
+        //   this.files[targetIndex] = this.files[this.currentSourceImageIndex];
+        //   this.files[this.currentSourceImageIndex] = temp;
+        //   this.currentSourceImageIndex = undefined;
+        //   this.resetOpacity();
+        // }
+    };
+    /**
+     * @param {?} event
+     * @param {?} index
+     * @return {?}
+     */
+    UploaderComponent.prototype.checkPos = function (event, index) {
+        console.log('starting');
+        if (!this.currentSourceImageIndex) {
+            this.currentSourceImageIndex = index;
+        }
+    };
+    /**
+     * @param {?} index
+     * @param {?} opacity
+     * @return {?}
+     */
+    UploaderComponent.prototype.opacitize = function (index, opacity) {
+        console.log('OPACCCC');
+        if (index !== this.currentSourceImageIndex) {
+            console.log(index);
+            var /** @type {?} */ img = (document.getElementById('drag' + index));
+            img.style.opacity = opacity;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    UploaderComponent.prototype.resetOpacity = function () {
+        // for(let i=0; i<this.urls.length;i++) {
+        //   let img = <HTMLImageElement>document.getElementById('drag'+i);
+        //   img.style.opacity = '1';     
+        // }
+    };
+    /**
      * @return {?}
      */
     UploaderComponent.prototype.ngOnDestroy = function () {
@@ -190,7 +242,7 @@ var UploaderComponent = (function () {
 UploaderComponent.decorators = [
     { type: Component, args: [{
                 selector: 'app-uploader',
-                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\">\n      <img\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      style=\"max-width:100px\" [src]=\"image\" alt=\"noImg\">\n    </div>\n\n    <!-- (drop)=\"sortImages($event)\"\n\n    id=\"drag{{v}}\"\n    draggable=\"true\" \n    (dragstart)=\"checkPos($event, v)\" \n    (dragenter)=\"opacitize(v, '0.4')\"\n    (dragleave)=\"opacitize(v, '1')\"  -->\n  ",
+                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
                 styles: ["\n    .imageContainer {\n        display: block;\n    }\n  "]
             },] },
 ];
@@ -207,6 +259,7 @@ UploaderComponent.propDecorators = {
     'imagesRemovable': [{ type: Input },],
     'usingImages': [{ type: Input },],
     'buttonClass': [{ type: Input },],
+    'imageWidth': [{ type: Input },],
     'multiple': [{ type: Input },],
     'showImagesOnAdd': [{ type: Input },],
     'id': [{ type: Input },],

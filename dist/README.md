@@ -1,22 +1,22 @@
-#Angular File Upload Module
+# Angular File Upload Module
  
 
-#Introduction
+# Introduction
 An angular module for file uploads. Works great with images.
 
 Currently Tested on Angular 4, Compatibility will be updated soon for other versions.
 
-<----> DEMO IN THE WORKS <-------->
+DEMO IN THE WORKS
 
-#How To Use
+# How To Use
 
-##Installation: 
+## Installation: 
 
 ``` npm i angular-upload-files ```
 
-##Usage:
+## Usage:
 
-###App Module Setup:
+### App Module Setup:
 
 ``` 
 import {UploaderModule} from 'angular-upload-files'; 
@@ -39,7 +39,7 @@ import {UploaderModule} from 'angular-upload-files';
   bootstrap: [AppComponent],
 }) 
 ```
-###In your component:
+### In your component:
 ```
 import { UploadService, UploadParams } from 'angular-upload-files';
 
@@ -48,7 +48,7 @@ constructor(private uploadService : UploadService) { }
 
 ```
 
-###Interfaces: 
+### Interfaces: 
 ```
 export interface UploadParams {
   formDataPropertyName: string;
@@ -65,7 +65,7 @@ You must input a UploadParams object into each instance of the uploader:
 
 ``` formData.append(this.uploadParams.formDataPropertyName, file, file.name); ``` 
 
-####Extra Params:
+#### Extra Params:
 Extra Params is for passing query string parameters to your request:
 
 example: 
@@ -87,10 +87,10 @@ example:
 
 
 
-###Inputs:
+### Inputs:
 | Input | Description |
 | --- | --- |
-| uploadParams: UploadParams | See UploadParams description above.|
+| uploadParams: UploadParams | See UploadParams description above. |
 | buttonText: string |  Set upload button text. |
 | buttonClass: string | Set class value. like: "btn btn-primary" |
 | id: number | Set uploader id |

@@ -17,20 +17,13 @@ export interface ExtraParams {
   template: `
     <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" #fileInput>
     <button id="uploadBtn{{id!==undefined?id:''}}" (click)="fileInput.click()">{{buttonText}}</button>
-    <div class="imageContainer" *ngIf="showImagesOnAdd">
+    <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img
+      id="drag{{v}}"
       (click)="removeImage(v)"
       *ngFor="let image of images; let v=index"                                 
-      style="max-width:100px" [src]="image" alt="noImg">
+      [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
     </div>
-
-    <!-- (drop)="sortImages($event)"
-
-    id="drag{{v}}"
-    draggable="true" 
-    (dragstart)="checkPos($event, v)" 
-    (dragenter)="opacitize(v, '0.4')"
-    (dragleave)="opacitize(v, '1')"  -->
   `,
   styles: [`
     .imageContainer {
@@ -44,6 +37,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() imagesRemovable: boolean;
   @Input() usingImages: boolean;
   @Input() buttonClass: string;
+  @Input() imageWidth: string;
   @Input() multiple: boolean;
   @Input() showImagesOnAdd: boolean;
   @Input() id: number;
@@ -171,6 +165,41 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
         (<HTMLButtonElement>document.getElementById('uploadBtn'+(this.id!==undefined?this.id:''))).classList.add(className); 
       }  
     }
+  }
+  sortImages(event) {
+    // alert();
+    console.log(event);
+    // let targetId = event.toElement.id;
+    // if(targetId.includes('drag')) {
+    //   let targetIndex = +targetId.replace('drag', '');
+    //   let temp = this.images[targetIndex];
+    //   this.images[targetIndex] = this.images[this.currentSourceImageIndex];
+    //   this.images[this.currentSourceImageIndex] = temp;
+    //   this.files[targetIndex] = this.files[this.currentSourceImageIndex];
+    //   this.files[this.currentSourceImageIndex] = temp;
+    //   this.currentSourceImageIndex = undefined;
+    //   this.resetOpacity();
+    // }
+  }
+  checkPos(event, index) {
+    console.log('starting');
+    if(!this.currentSourceImageIndex) {
+      this.currentSourceImageIndex = index;
+    }
+  }
+  opacitize(index, opacity){
+    console.log('OPACCCC');
+    if(index !== this.currentSourceImageIndex) {
+      console.log(index);
+      let img = <HTMLImageElement>document.getElementById('drag'+index);
+      img.style.opacity = opacity;
+    }
+  }
+  resetOpacity() {
+    // for(let i=0; i<this.urls.length;i++) {
+    //   let img = <HTMLImageElement>document.getElementById('drag'+i);
+    //   img.style.opacity = '1';     
+    // }
   }
   ngOnDestroy() {
     this.subscriptions.forEach( sub => sub.unsubscribe());

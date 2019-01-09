@@ -97,7 +97,7 @@ example:
 | postUrl: string | Uploader target url |
 | usingImages: boolean |  Set to true if images (and only images) are being uploaded. |
 | showImagesOnAdd: boolean | If usingImages is set to true, images will show in the DOM on add  |
-| showImagesOnAddWidth: string | CSS width value. like: "180px"  |
+| imagesWidth: string | CSS width value. like: "180px"  |
 | imagesRemovable: boolean | Images will be removed on click  |
 
 
