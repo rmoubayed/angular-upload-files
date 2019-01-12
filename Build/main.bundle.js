@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<app-uploader\n(onFilesSelected)=\"readFiles($event)\"\n(onUploadComplete)=\"uploadDone($event)\"\n[buttonText]=\"'Choose Image'\"\n[buttonClass]=\"'btn btn-default'\"\n[postUrl]=\"'https://api.imgur.com/3/image'\"\n[id]=\"0\"\n[multiple]=\"true\"\n[usingImages]=\"true\"\n[showImagesOnAdd]=\"true\"\n[imageWidth]=\"'180px'\"\n[uploadParams]=\"uploadParams\"\n></app-uploader>\n"
+module.exports = "\n\n<app-uploader\n(onFilesSelected)=\"readFiles($event)\"\n(onUploadComplete)=\"uploadDone($event)\"\n[buttonText]=\"'Choose Image'\"\n[buttonClass]=\"'btn btn-default'\"\n[postUrl]=\"'https://api.imgur.com/3/image'\"\n[id]=\"0\"\n[multiple]=\"true\"\n[usingImages]=\"true\"\n[showImagesOnAdd]=\"true\"\n[imageWidth]=\"'180px'\"\n[imagesRemovable]=\"true\"\n[uploadParams]=\"uploadParams\"\n></app-uploader>\n"
 
 /***/ }),
 
@@ -79,7 +79,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.readFiles = function (event) {
         console.log(event);
-        this.uploadService.startUpload.next(event.files);
+        // this.uploadService.startUpload.next(event.files);
         this.uploadService.currentUploadProgress.subscribe(function (progress) {
             console.log(progress);
         });
@@ -225,7 +225,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/uploader/uploader/uploader.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" #fileInput>\n<button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n<div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n  <img\n  id=\"drag{{v}}\"\n  (click)=\"removeImage(v)\"\n  *ngFor=\"let image of images; let v=index\"                                 \n  [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n</div>\n"
+module.exports = "<input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" id=\"fileInput\" #fileInput>\n<button id=\"uploadBtn{{id!==undefined?id:''}}\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n<div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n  <img\n  id=\"drag{{v}}\"\n  (click)=\"removeImage(v)\"\n  *ngFor=\"let image of images; let v=index\"                                 \n  [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n</div>\n"
 
 /***/ }),
 
@@ -348,11 +348,13 @@ var UploaderComponent = (function () {
             this.files.splice(index, 1);
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
+            document.getElementById('fileInput').value = "";
         }
     };
     UploaderComponent.prototype.removeFile = function (index) {
         this.files.splice(index, 1);
         this.onFileRemoved.emit();
+        document.getElementById('fileInput').value = "";
     };
     UploaderComponent.prototype.clearFiles = function () {
         this.files = [];
