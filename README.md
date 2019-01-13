@@ -6,7 +6,7 @@ An angular module for file uploads. Works great with images.
 
 Currently Tested on Angular 4, Compatibility will be updated soon for other versions.
 
-DEMO IN THE WORKS
+https://angular-gsyn77.stackblitz.io
 
 # How To Use
 
@@ -133,4 +133,4 @@ this.uploadService.currentUploadProgress.subscribe(
 
 #DEMO
 
-Detailed Example and Demo coming soon.
+https://angular-gsyn77.stackblitz.io
