@@ -1,7 +1,8 @@
-import { UploadParams } from './../../.ng_build/ts/src/app/uploader/uploader/uploader.component.d';
+
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UploadService } from './uploader/uploader/upload.service';
+import { UploadParams } from './uploader/uploader/uploader.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,8 @@ import { UploadService } from './uploader/uploader/upload.service';
     [imagesRemovable]="true"
     [uploadParams]="uploadParams"
     ></app-uploader>
+
+    <p>{{progress}}% uploaded</p>
   `,
   styles: [`
 
@@ -29,6 +32,7 @@ import { UploadService } from './uploader/uploader/upload.service';
 })
 export class AppComponent implements OnInit {
   uploadParams : UploadParams;
+  progress: string;
   constructor(private router: Router, private uploadService : UploadService) {
 
   }
@@ -48,6 +52,7 @@ export class AppComponent implements OnInit {
     this.uploadService.currentUploadProgress.subscribe(
       (progress)=>{
         console.log(progress);
+        this.progress = progress;
       }
     )
   }

@@ -4,7 +4,7 @@
 # Introduction
 An angular module for file uploads. Works great with images.
 
-Currently Tested on Angular 4, Compatibility will be updated soon for other versions.
+Currently Tested on Angular 4+
 
 https://angular-gsyn77.stackblitz.io
 

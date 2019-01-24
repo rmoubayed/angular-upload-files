@@ -322,4 +322,4 @@ UploaderModule.ctorParameters = () => [];
  */
 
 export { UploaderModule, UploadService, UploaderComponent as ɵa };
-//# sourceMappingURL=ang4-image-upload.js.map
+//# sourceMappingURL=angular-upload-files.js.map

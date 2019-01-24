@@ -1,8 +1,8 @@
 {
-  "name": "ang4-image-upload",
-  "version": "1.1.99",
+  "name": "angular-upload-files",
+  "version": "1.2.2",
   "description": "",
-  "main": "bundles/ang4-image-upload.umd.js",
+  "main": "bundles/angular-upload-files.umd.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -32,10 +32,7 @@
     "core-js": "^2.4.1",
     "del": "3.0.0",
     "npm": "^6.4.1",
-    "pica": "^5.0.0",
-    "plunk": "^0.5.1",
     "pump": "^1.0.2",
-    "quill": "^1.3.6",
     "rxjs": "^5.4.2",
     "tether": "^1.4.3",
     "tsickle": "^0.34.0",
@@ -69,8 +66,8 @@
     "type": "git",
     "url": "https://github.com/rmoubayed/angular-upload-files"
   },
-  "module": "ang4-image-upload/ang4-image-upload.es5.js",
-  "es2015": "ang4-image-upload/ang4-image-upload.js",
-  "typings": "ang4-image-upload.d.ts",
-  "metadata": "ang4-image-upload.metadata.json"
+  "module": "angular-upload-files/angular-upload-files.es5.js",
+  "es2015": "angular-upload-files/angular-upload-files.js",
+  "typings": "angular-upload-files.d.ts",
+  "metadata": "angular-upload-files.metadata.json"
 }
