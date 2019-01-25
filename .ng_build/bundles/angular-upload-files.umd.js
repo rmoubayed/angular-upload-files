@@ -32,7 +32,6 @@ var UploaderComponent = (function () {
         this.onFilesSelected = new core.EventEmitter();
         this.onUploadComplete = new core.EventEmitter();
         this.onImageRemoved = new core.EventEmitter();
-        this.onFileRemoved = new core.EventEmitter();
         this.images = [];
         this.subscriptions = [];
     }
@@ -242,7 +241,6 @@ UploaderComponent.propDecorators = {
     'onFilesSelected': [{ type: core.Output },],
     'onUploadComplete': [{ type: core.Output },],
     'onImageRemoved': [{ type: core.Output },],
-    'onFileRemoved': [{ type: core.Output },],
 };
 var UploaderModule = (function () {
     function UploaderModule() {

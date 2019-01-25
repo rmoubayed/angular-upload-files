@@ -13,7 +13,6 @@ export class UploaderComponent {
         this.onFilesSelected = new EventEmitter();
         this.onUploadComplete = new EventEmitter();
         this.onImageRemoved = new EventEmitter();
-        this.onFileRemoved = new EventEmitter();
         this.images = [];
         this.subscriptions = [];
     }
@@ -235,7 +234,6 @@ UploaderComponent.propDecorators = {
     'onFilesSelected': [{ type: Output },],
     'onUploadComplete': [{ type: Output },],
     'onImageRemoved': [{ type: Output },],
-    'onFileRemoved': [{ type: Output },],
 };
 function UploaderComponent_tsickle_Closure_declarations() {
     /** @type {?} */
@@ -273,8 +271,6 @@ function UploaderComponent_tsickle_Closure_declarations() {
     UploaderComponent.prototype.onUploadComplete;
     /** @type {?} */
     UploaderComponent.prototype.onImageRemoved;
-    /** @type {?} */
-    UploaderComponent.prototype.onFileRemoved;
     /** @type {?} */
     UploaderComponent.prototype.currentSourceImageIndex;
     /** @type {?} */

@@ -45,7 +45,6 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() onFilesSelected : EventEmitter<any> = new EventEmitter<any>();
   @Output() onUploadComplete : EventEmitter<any> = new EventEmitter<any>();
   @Output() onImageRemoved : EventEmitter<any> = new EventEmitter<any>();
-  @Output() onFileRemoved : EventEmitter<any> = new EventEmitter<any>();
 
   currentSourceImageIndex : number;
 

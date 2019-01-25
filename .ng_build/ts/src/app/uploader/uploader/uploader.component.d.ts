@@ -26,7 +26,6 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     onFilesSelected: EventEmitter<any>;
     onUploadComplete: EventEmitter<any>;
     onImageRemoved: EventEmitter<any>;
-    onFileRemoved: EventEmitter<any>;
     currentSourceImageIndex: number;
     images: any[];
     private subscriptions;
