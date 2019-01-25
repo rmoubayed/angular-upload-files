@@ -52,7 +52,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
       let len = JSON.parse(JSON.stringify(this.images.length));
       if(data.id === this.id) {
         for(let i=0;i<this.files.length;i++) {
-          this.removeFile(i);
+          this.usingImages ? this.removeImage(i) : this.removeFile(i);
         } 
       }
     }))
