@@ -16,7 +16,7 @@ export interface ExtraParams {
   selector: 'app-uploader',
   template: `
     <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" id="fileInput" #fileInput>
-    <button id="uploadBtn{{id!==undefined?id:''}}" (click)="fileInput.click()">{{buttonText}}</button>
+    <button id="uploadBtn{{id!==undefined?id:''}}" type="button" (click)="fileInput.click()">{{buttonText}}</button>
     <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img
       id="drag{{v}}"
