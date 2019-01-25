@@ -15,7 +15,6 @@ export class UploaderComponent {
         this.onImageRemoved = new EventEmitter();
         this.onFileRemoved = new EventEmitter();
         this.images = [];
-        this.files = [];
         this.subscriptions = [];
     }
     /**
@@ -27,23 +26,18 @@ export class UploaderComponent {
                 this.onUpload(files[i]);
             }
         }));
-        this.subscriptions.push(this.uploadService.clearFiles.subscribe((data) => {
+        this.subscriptions.push(this.uploadService.clearImages.subscribe((data) => {
             let /** @type {?} */ len = JSON.parse(JSON.stringify(this.images.length));
-            if (data.id === this.id) {
-                for (let /** @type {?} */ i = 0; i < this.files.length; i++) {
-                    this.removeFile(i);
+            if ((data.id && data.id === this.id) || !data.id) {
+                for (let /** @type {?} */ i = 0; i < this.images.length; i++) {
+                    if (this.usingImages) {
+                        this.removeImage(i);
+                    }
                 }
             }
         }));
         this.subscriptions.push(this.uploadService.removeImage.subscribe((data) => {
-            // console.log('removing');
-            if (data.id === this.id) {
-                this.removeImage(data.index);
-            }
-        }));
-        this.subscriptions.push(this.uploadService.removeFile.subscribe((data) => {
-            // console.log('removing');
-            if (data.id === this.id) {
+            if ((data.id && data.id === this.id) || !data.id) {
                 this.removeImage(data.index);
             }
         }));
@@ -71,7 +65,6 @@ export class UploaderComponent {
      * @return {?}
      */
     onFileSelected(event) {
-        this.clearFiles();
         if (event && event.target && event.target.files) {
             let /** @type {?} */ files = (event.target.files);
             if (this.usingImages) {
@@ -119,28 +112,11 @@ export class UploaderComponent {
      * @return {?}
      */
     removeImage(index) {
-        if (this.imagesRemovable && this.usingImages) {
-            this.files.splice(index, 1);
+        if (this.usingImages) {
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
             ((document.getElementById('fileInput'))).value = "";
         }
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    removeFile(index) {
-        this.files.splice(index, 1);
-        this.onFileRemoved.emit();
-        ((document.getElementById('fileInput'))).value = "";
-    }
-    /**
-     * @return {?}
-     */
-    clearFiles() {
-        this.files = ([]);
-        this.images = [];
     }
     /**
      * @param {?} className
@@ -229,7 +205,7 @@ UploaderComponent.decorators = [
     <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img
       id="drag{{v}}"
-      (click)="removeImage(v)"
+      (click)="removeImage(v, true)"
       *ngFor="let image of images; let v=index"                                 
       [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
     </div>
@@ -306,8 +282,6 @@ function UploaderComponent_tsickle_Closure_declarations() {
     UploaderComponent.prototype.currentSourceImageIndex;
     /** @type {?} */
     UploaderComponent.prototype.images;
-    /** @type {?} */
-    UploaderComponent.prototype.files;
     /** @type {?} */
     UploaderComponent.prototype.subscriptions;
     /** @type {?} */

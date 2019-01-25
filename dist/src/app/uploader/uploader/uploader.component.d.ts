@@ -29,7 +29,6 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     onFileRemoved: EventEmitter<any>;
     currentSourceImageIndex: number;
     images: any[];
-    files: File[];
     private subscriptions;
     constructor(http: HttpClient, uploadService: UploadService);
     ngOnInit(): void;
@@ -38,8 +37,6 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     onFileSelected(event: any): void;
     onUpload(file: File): void;
     removeImage(index: any): void;
-    removeFile(index: any): void;
-    clearFiles(): void;
     addButtonStyle(className: string): void;
     sortImages(event: any): void;
     checkPos(event: any, index: any): void;

@@ -5,8 +5,6 @@ export class UploadService {
         this.startUpload = new Subject();
         this.currentUploadProgress = new Subject();
         this.clearImages = new Subject();
-        this.clearFiles = new Subject();
-        this.removeFile = new Subject();
         this.removeImage = new Subject();
     }
 }
@@ -31,10 +29,6 @@ function UploadService_tsickle_Closure_declarations() {
     UploadService.prototype.currentUploadProgress;
     /** @type {?} */
     UploadService.prototype.clearImages;
-    /** @type {?} */
-    UploadService.prototype.clearFiles;
-    /** @type {?} */
-    UploadService.prototype.removeFile;
     /** @type {?} */
     UploadService.prototype.removeImage;
 }

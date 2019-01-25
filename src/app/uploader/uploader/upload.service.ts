@@ -6,7 +6,5 @@ export class UploadService {
     startUpload : Subject<any> = new Subject<any>();
     currentUploadProgress: Subject<any> = new Subject<any>();
     clearImages: Subject<any> = new Subject<any>();
-    clearFiles: Subject<any> = new Subject<any>();
-    removeFile: Subject<any> = new Subject<any>();
     removeImage: Subject<any> = new Subject<any>();
 }

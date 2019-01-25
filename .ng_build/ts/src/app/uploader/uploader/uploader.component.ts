@@ -20,7 +20,7 @@ export interface ExtraParams {
     <div class="imageContainer" *ngIf="showImagesOnAdd" >
       <img
       id="drag{{v}}"
-      (click)="removeImage(v)"
+      (click)="removeImage(v, true)"
       *ngFor="let image of images; let v=index"                                 
       [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
     </div>
@@ -50,7 +50,6 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSourceImageIndex : number;
 
   images: any[] = [];
-  files : File[] = [];
   private subscriptions : Subscription[] = [];
   constructor(private http : HttpClient, private uploadService : UploadService) { }
 
@@ -62,23 +61,18 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     ))
-    this.subscriptions.push(this.uploadService.clearFiles.subscribe((data:any)=>{
+    this.subscriptions.push(this.uploadService.clearImages.subscribe((data:any)=>{
       let len = JSON.parse(JSON.stringify(this.images.length));
-      if(data.id === this.id) {
-        for(let i=0;i<this.files.length;i++) {
-          this.removeFile(i);
+      if((data.id && data.id === this.id) || !data.id) {
+        for(let i=0;i<this.images.length;i++) {
+          if(this.usingImages) {
+            this.removeImage(i); 
+          }
         } 
       }
     }))
     this.subscriptions.push(this.uploadService.removeImage.subscribe((data:any)=>{
-      // console.log('removing');
-      if(data.id === this.id) {
-        this.removeImage(data.index);
-      }
-    }))
-    this.subscriptions.push(this.uploadService.removeFile.subscribe((data:any)=>{
-      // console.log('removing');
-      if(data.id === this.id) {
+      if((data.id && data.id === this.id) || !data.id) {
         this.removeImage(data.index);
       }
     }))
@@ -95,7 +89,6 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   onFileSelected(event) {
-    this.clearFiles();
     if(event && event.target && event.target.files) {
       let files = <FileList> event.target.files;
       if(this.usingImages) {
@@ -138,21 +131,11 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
   removeImage(index) {
-    if(this.imagesRemovable && this.usingImages) {
-      this.files.splice(index, 1);
+    if(this.usingImages) {
       this.images.splice(index, 1);
       this.onImageRemoved.emit();
       (<HTMLInputElement>document.getElementById('fileInput')).value = "";
     }
-  }
-  removeFile(index) {
-    this.files.splice(index, 1);
-    this.onFileRemoved.emit();
-    (<HTMLInputElement>document.getElementById('fileInput')).value = "";
-  }
-  clearFiles() {
-    this.files = <File[]>[];
-    this.images = [];
   }
   addButtonStyle(className : string) {
     if(className.indexOf(' ') !== -1) {

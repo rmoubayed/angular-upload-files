@@ -7,8 +7,6 @@ var UploadService = (function () {
         this.startUpload = new Subject$1();
         this.currentUploadProgress = new Subject$1();
         this.clearImages = new Subject$1();
-        this.clearFiles = new Subject$1();
-        this.removeFile = new Subject$1();
         this.removeImage = new Subject$1();
     }
     return UploadService;
@@ -34,7 +32,6 @@ var UploaderComponent = (function () {
         this.onImageRemoved = new EventEmitter();
         this.onFileRemoved = new EventEmitter();
         this.images = [];
-        this.files = [];
         this.subscriptions = [];
     }
     /**
@@ -47,22 +44,17 @@ var UploaderComponent = (function () {
                 _this.onUpload(files[i]);
             }
         }));
-        this.subscriptions.push(this.uploadService.clearFiles.subscribe(function (data) {
-            if (data.id === _this.id) {
-                for (var /** @type {?} */ i = 0; i < _this.files.length; i++) {
-                    _this.removeFile(i);
+        this.subscriptions.push(this.uploadService.clearImages.subscribe(function (data) {
+            if ((data.id && data.id === _this.id) || !data.id) {
+                for (var /** @type {?} */ i = 0; i < _this.images.length; i++) {
+                    if (_this.usingImages) {
+                        _this.removeImage(i);
+                    }
                 }
             }
         }));
         this.subscriptions.push(this.uploadService.removeImage.subscribe(function (data) {
-            // console.log('removing');
-            if (data.id === _this.id) {
-                _this.removeImage(data.index);
-            }
-        }));
-        this.subscriptions.push(this.uploadService.removeFile.subscribe(function (data) {
-            // console.log('removing');
-            if (data.id === _this.id) {
+            if ((data.id && data.id === _this.id) || !data.id) {
                 _this.removeImage(data.index);
             }
         }));
@@ -91,7 +83,6 @@ var UploaderComponent = (function () {
      */
     UploaderComponent.prototype.onFileSelected = function (event) {
         var _this = this;
-        this.clearFiles();
         if (event && event.target && event.target.files) {
             var /** @type {?} */ files_1 = (event.target.files);
             if (this.usingImages) {
@@ -139,28 +130,11 @@ var UploaderComponent = (function () {
      * @return {?}
      */
     UploaderComponent.prototype.removeImage = function (index) {
-        if (this.imagesRemovable && this.usingImages) {
-            this.files.splice(index, 1);
+        if (this.usingImages) {
             this.images.splice(index, 1);
             this.onImageRemoved.emit();
             ((document.getElementById('fileInput'))).value = "";
         }
-    };
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    UploaderComponent.prototype.removeFile = function (index) {
-        this.files.splice(index, 1);
-        this.onFileRemoved.emit();
-        ((document.getElementById('fileInput'))).value = "";
-    };
-    /**
-     * @return {?}
-     */
-    UploaderComponent.prototype.clearFiles = function () {
-        this.files = ([]);
-        this.images = [];
     };
     /**
      * @param {?} className
@@ -244,7 +218,7 @@ var UploaderComponent = (function () {
 UploaderComponent.decorators = [
     { type: Component, args: [{
                 selector: 'app-uploader',
-                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" id=\"fileInput\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" type=\"button\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
+                template: "\n    <input style=\"display: none\" type=\"file\" [multiple]=\"multiple\" (change)=\"onFileSelected($event)\" id=\"fileInput\" #fileInput>\n    <button id=\"uploadBtn{{id!==undefined?id:''}}\" type=\"button\" (click)=\"fileInput.click()\">{{buttonText}}</button>\n    <div class=\"imageContainer\" *ngIf=\"showImagesOnAdd\" >\n      <img\n      id=\"drag{{v}}\"\n      (click)=\"removeImage(v, true)\"\n      *ngFor=\"let image of images; let v=index\"                                 \n      [ngStyle]=\"{'width' : imageWidth}\" [src]=\"image\" alt=\"noImg\">\n    </div>\n  ",
                 styles: ["\n    .imageContainer {\n        display: block;\n    }\n  "]
             },] },
 ];

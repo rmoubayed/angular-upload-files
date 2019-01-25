@@ -3,7 +3,7 @@
 <div class="imageContainer" *ngIf="showImagesOnAdd" >
   <img
   id="drag{{v}}"
-  (click)="removeImage(v)"
+  (click)="removeImage(v, true)"
   *ngFor="let image of images; let v=index"                                 
   [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
 </div>
