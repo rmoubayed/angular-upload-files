@@ -109,7 +109,6 @@ example:
 | (onFilesSelected) | event containing {files: files} OR {files: files, base64s: base64ImgUrls} based on 'usingImages' |
 | (onUploadComplete) | Event fired on each upload completion containing {response: event, file: file} |
 | (onImageRemoved) | Event fired when when you remove an image (usingIMages mode)  |
-| (onFileRemoved) | Event fired when when you remove a file |
 
 ###Triggering events from your component:
 
@@ -117,8 +116,7 @@ example:
 | --- | --- |
 | Start Upload | ``` this.uploadService.startUpload.next(files) ``` |
 | Remove Image | ``` this.uploadService.removeImage.next({id: componentId, index: file/image index}) ``` |
-| Remove File | ``` this.uploadService.removeFile.next({id: componentId, index: file index}) ``` |
-| Clear Files |  ``` this.uploadService.clearFiles.next({id: componentId}) ``` |
+| Clear Images |  ``` this.uploadService.clearImages.next({id: componentId}) ||  this.uploadService.clearImages.next({})``` |
 
 ###Upload Progress:
 

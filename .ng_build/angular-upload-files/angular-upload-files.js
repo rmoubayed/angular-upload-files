@@ -46,11 +46,7 @@ class UploaderComponent {
         }));
         this.subscriptions.push(this.uploadService.clearImages.subscribe((data) => {
             if ((data.id && data.id === this.id) || !data.id) {
-                for (let /** @type {?} */ i = 0; i < this.images.length; i++) {
-                    if (this.usingImages) {
-                        this.removeImage(i);
-                    }
-                }
+                this.images = [];
             }
         }));
         this.subscriptions.push(this.uploadService.removeImage.subscribe((data) => {
@@ -129,6 +125,7 @@ class UploaderComponent {
      * @return {?}
      */
     removeImage(index) {
+        console.log(this.usingImages);
         if (this.usingImages) {
             this.images.splice(index, 1);
             this.onImageRemoved.emit();

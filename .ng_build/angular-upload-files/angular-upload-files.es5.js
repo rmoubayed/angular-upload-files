@@ -46,11 +46,7 @@ var UploaderComponent = (function () {
         }));
         this.subscriptions.push(this.uploadService.clearImages.subscribe(function (data) {
             if ((data.id && data.id === _this.id) || !data.id) {
-                for (var /** @type {?} */ i = 0; i < _this.images.length; i++) {
-                    if (_this.usingImages) {
-                        _this.removeImage(i);
-                    }
-                }
+                _this.images = [];
             }
         }));
         this.subscriptions.push(this.uploadService.removeImage.subscribe(function (data) {
@@ -130,6 +126,7 @@ var UploaderComponent = (function () {
      * @return {?}
      */
     UploaderComponent.prototype.removeImage = function (index) {
+        console.log(this.usingImages);
         if (this.usingImages) {
             this.images.splice(index, 1);
             this.onImageRemoved.emit();

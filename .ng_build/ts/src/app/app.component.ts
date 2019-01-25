@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
   }
   readFiles(event) {
     console.log(event);
+    this.uploadService.clearImages.next({});
     // this.uploadService.startUpload.next(event.files);
     this.uploadService.currentUploadProgress.subscribe(
       (progress)=>{

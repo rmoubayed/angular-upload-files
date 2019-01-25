@@ -1,6 +1,6 @@
 {
   "name": "angular-upload-files",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "",
   "main": "bundles/angular-upload-files.umd.js",
   "scripts": {

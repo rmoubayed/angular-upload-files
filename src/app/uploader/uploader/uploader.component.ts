@@ -31,7 +31,6 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() onFilesSelected : EventEmitter<any> = new EventEmitter<any>();
   @Output() onUploadComplete : EventEmitter<any> = new EventEmitter<any>();
   @Output() onImageRemoved : EventEmitter<any> = new EventEmitter<any>();
-  @Output() onFileRemoved : EventEmitter<any> = new EventEmitter<any>();
 
   currentSourceImageIndex : number;
 
@@ -50,11 +49,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscriptions.push(this.uploadService.clearImages.subscribe((data:any)=>{
       let len = JSON.parse(JSON.stringify(this.images.length));
       if((data.id && data.id === this.id) || !data.id) {
-        for(let i=0;i<len;i++) {
-          if(this.usingImages) {
-            this.removeImage(i); 
-          }
-        } 
+          this.images = [];
       }
     }))
     this.subscriptions.push(this.uploadService.removeImage.subscribe((data:any)=>{
@@ -117,6 +112,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   }
   removeImage(index) {
+    console.log(this.usingImages);
     if(this.usingImages) {
       this.images.splice(index, 1);
       this.onImageRemoved.emit();
