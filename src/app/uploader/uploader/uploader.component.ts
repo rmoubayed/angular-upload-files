@@ -50,7 +50,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscriptions.push(this.uploadService.clearImages.subscribe((data:any)=>{
       let len = JSON.parse(JSON.stringify(this.images.length));
       if((data.id && data.id === this.id) || !data.id) {
-        for(let i=0;i<this.images.length;i++) {
+        for(let i=0;i<len;i++) {
           if(this.usingImages) {
             this.removeImage(i); 
           }
