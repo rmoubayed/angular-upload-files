@@ -1,6 +1,5 @@
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { UploadService } from './uploader/uploader/upload.service';
 import { UploadParams } from './uploader/uploader/uploader.component';
 
@@ -12,7 +11,7 @@ import { UploadParams } from './uploader/uploader/uploader.component';
 export class AppComponent implements OnInit {
   uploadParams : UploadParams;
   progress: string;
-  constructor(private router: Router, private uploadService : UploadService) {
+  constructor(private uploadService : UploadService) {
 
   }
   ngOnInit() {
