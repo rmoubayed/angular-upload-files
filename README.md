@@ -2,11 +2,11 @@
  
 
 # Introduction
-An angular module for file uploads. Works great with images.
+An angular module for file uploads. Works great with images. INSTANTLY GET IMAGE PREVIEW BEFORE UPLOAD (ON FILE SELECT)
 
 Currently Tested on Angular 4+
 
-https://angular-gsyn77.stackblitz.io
+https://angular-w4tx91.stackblitz.io
 
 # How To Use
 
@@ -230,4 +230,4 @@ this.uploadService.currentUploadProgress.subscribe(
 
 # DEMO
 
-https://angular-gsyn77.stackblitz.io
+https://angular-w4tx91.stackblitz.io

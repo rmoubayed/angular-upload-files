@@ -22,11 +22,14 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     multiple: boolean;
     showImagesOnAdd: boolean;
     id: number;
+    imageRemoveType: string;
     uploadParams: UploadParams;
     onFilesSelected: EventEmitter<any>;
     onUploadComplete: EventEmitter<any>;
     onImageRemoved: EventEmitter<any>;
     currentSourceImageIndex: number;
+    uploadInProgress: boolean;
+    imageCount: number;
     images: any[];
     private subscriptions;
     constructor(http: HttpClient, uploadService: UploadService);
@@ -35,7 +38,7 @@ export declare class UploaderComponent implements OnInit, OnDestroy, AfterViewIn
     getBase64(file: any): Promise<{}>;
     onFileSelected(event: any): void;
     onUpload(file: File): void;
-    removeImage(index: any): void;
+    removeImage(index: any, fromClick?: any): void;
     addButtonStyle(className: string): void;
     sortImages(event: any): void;
     checkPos(event: any, index: any): void;
