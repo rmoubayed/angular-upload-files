@@ -16,6 +16,90 @@ https://angular-gsyn77.stackblitz.io
 
 ## Usage:
 
+### Quick Example
+
+#### example.component.ts:
+
+```
+
+import { Component, OnInit} from '@angular/core';
+import { UploadService, UploadParams } from 'angular-upload-files';
+
+@Component({
+  selector: 'app-example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example].component.css']
+})
+export class ExampleComponent implements OnInit {
+
+  uploadParams : UploadParams;
+  progress: string;
+  fileCount: number;
+  files: any[];
+
+  constructor(private uploadService : UploadService) {}
+
+  ngOnInit() {
+    this.uploadParams = {
+      formDataPropertyName: 'image', 
+      extraParams: [{
+        paramValueIsFromFile: true,
+        paramValue: "name",
+        paramName: "filename"
+      }]
+    }
+    this.uploadService.currentUploadProgress.subscribe(
+      (progress)=>{
+        console.log(progress);
+        this.progress = progress;
+      }
+    )
+  }
+  readFiles(event) {
+    console.log(event, event.files, event.base64s); //read files from here, and if using images base64s also
+    this.fileCount = event.files.length;
+
+    // you can manipulate the files here, or just store them
+    this.files = event.files;
+  }
+  uploadDone(event) {
+    console.log(event);
+    this.fileCount--;
+
+    if(this.fileCount === 0) {
+      //files are COMPLETELY done uploading
+    }
+  }
+}
+
+```
+
+#### example.component.html
+
+``` 
+
+<app-uploader
+(onFilesSelected)="readFiles($event)"
+(onUploadComplete)="uploadDone($event)"
+[buttonText]="'Choose Image'"
+[buttonClass]="'btn btn-default'"
+[postUrl]="'https://api.imgur.com/3/image'"
+[id]="0"
+[multiple]="true"
+[usingImages]="true"
+[showImagesOnAdd]="true"
+[imageWidth]="'180px'"
+[imagesRemovable]="true"
+[imageRemoveType]="'clickOnX'"
+[uploadParams]="uploadParams"
+></app-uploader>
+
+<p>{{progress}}% uploaded</p>
+
+
+
+```
+
 ### App Module Setup:
 
 ``` 
@@ -66,6 +150,7 @@ You must input a UploadParams object into each instance of the uploader:
 ``` formData.append(this.uploadParams.formDataPropertyName, file, file.name); ``` 
 
 #### Extra Params:
+
 Extra Params is for passing query string parameters to your request:
 
 example: 
@@ -88,6 +173,7 @@ example:
 
 
 ### Inputs:
+
 | Input | Description |
 | --- | --- |
 | uploadParams: UploadParams | See UploadParams description above. |
@@ -98,11 +184,12 @@ example:
 | usingImages: boolean |  Set to true if images (and only images) are being uploaded. |
 | showImagesOnAdd: boolean | If usingImages is set to true, images will show in the DOM on add  |
 | imageWidth: string | CSS width value. like: "180px"  |
-| imagesRemovable: boolean | Images will be removed on click  |
+| imagesRemovable: boolean | Images can be removed. |
+| imageRemoveType: string |  'clickOnImage' OR 'clickOnX' |
 
 
 
-###Events:
+### Events:
 
 | Event | Description |
 | --- | --- |
@@ -110,7 +197,16 @@ example:
 | (onUploadComplete) | Event fired on each upload completion containing {response: event, file: file} |
 | (onImageRemoved) | Event fired when when you remove an image (usingIMages mode)  |
 
-###Triggering events from your component:
+
+### Triggering events from your component:
+
+| Event | Description |
+| --- | --- |
+| Start Upload | ``` this.uploadService.startUpload.next(files) ``` |
+| Remove Image | ``` this.uploadService.removeImage.next(index: file/image index}) ``` |
+| Clear Images |  ``` this.uploadService.clearImages.next({})``` |
+
+### Triggering events from your component: (MULTIPLE UPLOADERS)
 
 | Event | Description |
 | --- | --- |
@@ -118,7 +214,10 @@ example:
 | Remove Image | ``` this.uploadService.removeImage.next({id: componentId, index: file/image index}) ``` |
 | Clear Images |  ``` this.uploadService.clearImages.next({id: componentId}) ||  this.uploadService.clearImages.next({})``` |
 
-###Upload Progress:
+
+NOTE: You may omit the componentId but all uploaders will receive the sent event if you do so.
+
+### Upload Progress:
 
 ```
 this.uploadService.currentUploadProgress.subscribe(
@@ -129,6 +228,6 @@ this.uploadService.currentUploadProgress.subscribe(
 
 ```
 
-#DEMO
+# DEMO
 
 https://angular-gsyn77.stackblitz.io

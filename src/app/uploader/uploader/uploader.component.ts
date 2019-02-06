@@ -27,12 +27,15 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() multiple: boolean;
   @Input() showImagesOnAdd: boolean;
   @Input() id: number;
+  @Input() imageRemoveType: string;
   @Input() uploadParams: UploadParams;
   @Output() onFilesSelected : EventEmitter<any> = new EventEmitter<any>();
   @Output() onUploadComplete : EventEmitter<any> = new EventEmitter<any>();
   @Output() onImageRemoved : EventEmitter<any> = new EventEmitter<any>();
 
   currentSourceImageIndex : number;
+  uploadInProgress: boolean = false;
+  imageCount: number;
 
   images: any[] = [];
   private subscriptions : Subscription[] = [];
@@ -41,6 +44,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.subscriptions.push(this.uploadService.startUpload.subscribe(
       (files)=>{
+        this.uploadInProgress = true;
         for(let i=0; i<files.length;i++) {
           this.onUpload(files[i]);
         }
@@ -48,12 +52,12 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
     ))
     this.subscriptions.push(this.uploadService.clearImages.subscribe((data:any)=>{
       let len = JSON.parse(JSON.stringify(this.images.length));
-      if((data.id && data.id === this.id) || !data.id) {
+      if(((data.id && data.id === this.id) || !data.id) && this.imagesRemovable) {
           this.images = [];
       }
     }))
     this.subscriptions.push(this.uploadService.removeImage.subscribe((data:any)=>{
-      if((data.id && data.id === this.id) || !data.id) {
+      if(((data.id && data.id === this.id) || !data.id) && this.imagesRemovable) {
         this.removeImage(data.index);
       }
     }))
@@ -61,6 +65,14 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.addButtonStyle(this.buttonClass);
   }
+  // adjustImageContainerWidth() {
+  //   let images = <HTMLCollectionOf<HTMLDivElement>>document.getElementsByClassName('imageContainer');
+  //   console.log(images.item(0));
+  //   for(let i=0; i<this.images.length;i++) {
+  //     images.item(i).style.width = this.imageWidth;
+  //     console.log(images.item(i).style.width, this.imageWidth)
+  //   }
+  // }
   getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -72,6 +84,7 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   onFileSelected(event) {
     if(event && event.target && event.target.files) {
       let files = <FileList> event.target.files;
+      this.imageCount = files.length;
       if(this.usingImages) {
         for(let i=0; i<files.length;i++) {
           console.log(files[i], event);
@@ -84,12 +97,14 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           );
         }
+        // this.adjustImageContainerWidth();
       } else {
         this.onFilesSelected.emit({files: files});
       }
     }
   }
   onUpload(file : File) {
+    this.imageCount--;
     let fd = new FormData();
     fd.append(this.uploadParams.formDataPropertyName, file, file.name);
     let params = new HttpParams();;
@@ -110,13 +125,18 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     )
+    if(this.imageCount === 0) {
+      this.uploadInProgress = false;
+    }
   }
-  removeImage(index) {
+  removeImage(index, fromClick?) {
     console.log(this.usingImages);
-    if(this.usingImages) {
-      this.images.splice(index, 1);
-      this.onImageRemoved.emit();
-      (<HTMLInputElement>document.getElementById('fileInput')).value = "";
+    if(this.usingImages && !this.uploadInProgress) {
+      if((fromClick && this.imageRemoveType === 'clickOnImage') || !fromClick) {
+        this.images.splice(index, 1);
+        this.onImageRemoved.emit();
+        (<HTMLInputElement>document.getElementById('fileInput')).value = "";
+      }
     }
   }
   addButtonStyle(className : string) {

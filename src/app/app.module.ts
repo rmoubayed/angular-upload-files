@@ -1,16 +1,10 @@
 import { UploaderModule } from './uploader/uploader/uploader.module';
-import { UploadService } from './uploader/uploader/upload.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Pipe, PipeTransform } from '@angular/core'; 
+import { NgModule} from '@angular/core'; 
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { EventEmitter } from '@angular/core';
-import { UploaderComponent } from './uploader/uploader/uploader.component';
-import { RouterModule, Router } from '@angular/router';
-import { Routes } from './app.routes';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +15,6 @@ import { Routes } from './app.routes';
     FormsModule,
     UploaderModule.forRoot(),
     HttpClientModule,
-    RouterModule.forRoot(Routes)
   ],
   providers: [
   ],
