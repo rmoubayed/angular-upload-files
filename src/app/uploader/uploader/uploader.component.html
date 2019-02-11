@@ -1,13 +1,18 @@
 <input style="display: none" type="file" [multiple]="multiple" (change)="onFileSelected($event)" id="fileInput" #fileInput>
-<button id="uploadBtn{{id!==undefined?id:''}}" type="button" (click)="fileInput.click()">{{buttonText}}</button>
+<button 
+    id="uploadBtn{{id!==undefined?id:''}}" 
+    type="button" (click)="fileInput.click()">
+{{buttonText}}</button>
 <ng-container *ngIf="showImagesOnAdd">
-    <div class="imageContainer" [ngStyle]="{'width' : imageWidth }" *ngFor="let image of images; let v=index">
-        <span *ngIf="imageRemoveType === 'clickOnX'" class="removeX" (click)="removeImage(v)">
-            <img src="https://www.dropbox.com/s/7orpnnnq4i1lh45/DelX.png?raw=1" alt="">
-        </span>
-        <img
-        id="drag{{v}}"
-        (click)="removeImage(v, true)"                                 
-        [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
-      </div>
+    <!-- <div class="imagesContainer"> -->
+        <div class="imageContainer" [ngStyle]="{'width' : imageWidth, 'display' :  imageContainerDisplay}" *ngFor="let image of images; let v=index">
+            <span *ngIf="imageRemoveType === 'clickOnX'" class="removeXContainer" (click)="removeImage(v)">
+                <span *ngIf="imageRemoveType === 'clickOnX'" class="removeX"></span>
+            </span>
+            <img
+            id="drag{{v}}"
+            (click)="removeImage(v, true)"                                 
+            [ngStyle]="{'width' : imageWidth}" [src]="image" alt="noImg">
+        </div>
+    <!-- </div> -->
 </ng-container>

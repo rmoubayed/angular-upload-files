@@ -2,7 +2,38 @@
     display: block;
     position: relative;
 }
+.removeX::before {
+    content: '';
+    width:16px;    
+    height:16px;
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    border-top: 1px solid black;
+    transform: translateY(7.5px);
+}
+.removeX::after {
+    content: '';
+    width:16px;    
+    height:16px;
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    border-left: 1px solid black;
+    transform: translateX(7.5px);
+}
 .removeX {
+    width:16px;    
+    height:16px;
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+.removeXContainer {
     background:rgba(253,253,253,0.7);
     width:16px;    
     height:16px;

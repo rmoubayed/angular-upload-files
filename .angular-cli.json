@@ -9,8 +9,7 @@
       "outDir": "./Build/",
       "assets": [
         "assets",
-        "favicon.ico",
-        { "glob": "**/*", "input": "src/assets", "output": "/assets" }
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",

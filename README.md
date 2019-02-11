@@ -92,6 +92,7 @@ export class ExampleComponent implements OnInit {
 [imagesRemovable]="true"
 [imageRemoveType]="'clickOnX'"
 [uploadParams]="uploadParams"
+[imageContainerDisplay]="'inline-block'"
 ></app-uploader>
 
 <p>{{progress}}% uploaded</p>
@@ -186,6 +187,7 @@ example:
 | imageWidth: string | CSS width value. like: "180px"  |
 | imagesRemovable: boolean | Images can be removed. |
 | imageRemoveType: string |  'clickOnImage' OR 'clickOnX' |
+| imageContainerDisplay: string | CSS display property for image container: eg. 'inline', 'inline-block' |
 
 
 
