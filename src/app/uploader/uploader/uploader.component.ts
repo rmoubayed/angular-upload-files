@@ -85,6 +85,8 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
   onFileSelected(event) {
     if(event && event.target && event.target.files) {
       let files = <FileList> event.target.files;
+      let images = [];
+      let count = files.length;
       this.imageCount = files.length;
       if(this.usingImages) {
         for(let i=0; i<files.length;i++) {
@@ -92,8 +94,10 @@ export class UploaderComponent implements OnInit, OnDestroy, AfterViewInit {
           this.getBase64(files[i]).then(
             data => {
               this.images.push(data);
-              if(this.images.length === files.length) {
-                this.onFilesSelected.emit({files: files, base64s: this.images});
+              images.push(data);
+              count--;
+              if(count === 0) {
+                this.onFilesSelected.emit({files: files, base64s: images});
               }
             }
           );
