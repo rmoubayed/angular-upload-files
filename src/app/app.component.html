@@ -3,18 +3,12 @@
 <app-uploader
 (onFilesSelected)="readFiles($event)"
 (onUploadComplete)="uploadDone($event)"
-[buttonText]="'Choose Image'"
+[buttonText]="'Choose File'"
 [buttonClass]="'btn btn-default'"
 [postUrl]="'https://api.imgur.com/3/image'"
 [id]="0"
 [multiple]="true"
-[usingImages]="true"
-[showImagesOnAdd]="true"
-[imageWidth]="'180px'"
-[imagesRemovable]="true"
-[imageRemoveType]="'clickOnX'"
 [uploadParams]="uploadParams"
-[imageContainerDisplay]="'inline-block'"
 ></app-uploader>
 
 <p>{{progress}}% uploaded</p>

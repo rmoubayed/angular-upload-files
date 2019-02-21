@@ -13,18 +13,18 @@ import { UploadService } from './upload.service';
     UploaderComponent
   ]
 })
-export class UploaderModule { 
+export class SimpleUploaderModule { 
      /**
    * Guaranteed singletons for provided Services across App.
    *
    * @return          An Angular Module with Providers
    */
     static forRoot(): ModuleWithProviders {
-        return {
-          ngModule: UploaderModule,
-          providers: [
-            UploadService,
-          ]
-        };
-      }
+      return {
+        ngModule: SimpleUploaderModule,
+        providers: [
+          UploadService,
+        ]
+      };
+    }
 }

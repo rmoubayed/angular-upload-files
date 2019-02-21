@@ -1,4 +1,4 @@
-import { UploaderModule } from './uploader/uploader/uploader.module';
+import { SimpleUploaderModule } from './uploader/uploader/uploader.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core'; 
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     FormsModule,
-    UploaderModule.forRoot(),
+    SimpleUploaderModule.forRoot(),
     HttpClientModule,
   ],
   providers: [

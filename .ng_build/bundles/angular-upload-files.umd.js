@@ -242,25 +242,25 @@ UploaderComponent.propDecorators = {
     'onUploadComplete': [{ type: core.Output },],
     'onImageRemoved': [{ type: core.Output },],
 };
-var UploaderModule = (function () {
-    function UploaderModule() {
+var SimpleUploaderModule = (function () {
+    function SimpleUploaderModule() {
     }
     /**
      * Guaranteed singletons for provided Services across App.
      *
      * @return {?} An Angular Module with Providers
      */
-    UploaderModule.forRoot = function () {
+    SimpleUploaderModule.forRoot = function () {
         return {
-            ngModule: UploaderModule,
+            ngModule: SimpleUploaderModule,
             providers: [
                 UploadService,
             ]
         };
     };
-    return UploaderModule;
+    return SimpleUploaderModule;
 }());
-UploaderModule.decorators = [
+SimpleUploaderModule.decorators = [
     { type: core.NgModule, args: [{
                 imports: [
                     common.CommonModule
@@ -276,9 +276,9 @@ UploaderModule.decorators = [
 /**
  * @nocollapse
  */
-UploaderModule.ctorParameters = function () { return []; };
+SimpleUploaderModule.ctorParameters = function () { return []; };
 
-exports.UploaderModule = UploaderModule;
+exports.SimpleUploaderModule = SimpleUploaderModule;
 exports.UploadService = UploadService;
 exports.ɵa = UploaderComponent;
 

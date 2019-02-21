@@ -253,7 +253,7 @@ UploaderComponent.propDecorators = {
     'onImageRemoved': [{ type: Output },],
 };
 
-class UploaderModule {
+class SimpleUploaderModule {
     /**
      * Guaranteed singletons for provided Services across App.
      *
@@ -261,14 +261,14 @@ class UploaderModule {
      */
     static forRoot() {
         return {
-            ngModule: UploaderModule,
+            ngModule: SimpleUploaderModule,
             providers: [
                 UploadService,
             ]
         };
     }
 }
-UploaderModule.decorators = [
+SimpleUploaderModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule
@@ -284,11 +284,11 @@ UploaderModule.decorators = [
 /**
  * @nocollapse
  */
-UploaderModule.ctorParameters = () => [];
+SimpleUploaderModule.ctorParameters = () => [];
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { UploaderModule, UploadService, UploaderComponent as ɵa };
+export { SimpleUploaderModule, UploadService, UploaderComponent as ɵa };
 //# sourceMappingURL=angular-upload-files.js.map

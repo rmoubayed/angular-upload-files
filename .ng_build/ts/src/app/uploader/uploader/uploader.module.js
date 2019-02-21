@@ -2,7 +2,7 @@ import { UploaderComponent } from './uploader.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploadService } from './upload.service';
-export class UploaderModule {
+export class SimpleUploaderModule {
     /**
      * Guaranteed singletons for provided Services across App.
      *
@@ -10,14 +10,14 @@ export class UploaderModule {
      */
     static forRoot() {
         return {
-            ngModule: UploaderModule,
+            ngModule: SimpleUploaderModule,
             providers: [
                 UploadService,
             ]
         };
     }
 }
-UploaderModule.decorators = [
+SimpleUploaderModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule
@@ -33,14 +33,14 @@ UploaderModule.decorators = [
 /**
  * @nocollapse
  */
-UploaderModule.ctorParameters = () => [];
-function UploaderModule_tsickle_Closure_declarations() {
+SimpleUploaderModule.ctorParameters = () => [];
+function SimpleUploaderModule_tsickle_Closure_declarations() {
     /** @type {?} */
-    UploaderModule.decorators;
+    SimpleUploaderModule.decorators;
     /**
      * @nocollapse
      * @type {?}
      */
-    UploaderModule.ctorParameters;
+    SimpleUploaderModule.ctorParameters;
 }
 //# sourceMappingURL=uploader.module.js.map

@@ -2,17 +2,15 @@
  
 
 # Introduction
-An angular module for file uploads. Works great with images. INSTANTLY GET IMAGE PREVIEW BEFORE UPLOAD (ON FILE SELECT)
+An angular module for file uploads. A simple skeleton that you can easily add to, no extra features, just easy to style upload button, with basic upload functionality using the Angular HttpClient
 
 Currently Tested on Angular 4+
-
-https://angular-w4tx91.stackblitz.io
 
 # How To Use
 
 ## Installation: 
 
-``` npm i angular-upload-files ```
+``` npm i ngx-simple-uploader ```
 
 ## Usage:
 
@@ -81,18 +79,12 @@ export class ExampleComponent implements OnInit {
 <app-uploader
 (onFilesSelected)="readFiles($event)"
 (onUploadComplete)="uploadDone($event)"
-[buttonText]="'Choose Image'"
+[buttonText]="'Choose File'"
 [buttonClass]="'btn btn-default'"
 [postUrl]="'https://api.imgur.com/3/image'"
 [id]="0"
 [multiple]="true"
-[usingImages]="true"
-[showImagesOnAdd]="true"
-[imageWidth]="'180px'"
-[imagesRemovable]="true"
-[imageRemoveType]="'clickOnX'"
 [uploadParams]="uploadParams"
-[imageContainerDisplay]="'inline-block'"
 ></app-uploader>
 
 <p>{{progress}}% uploaded</p>
@@ -104,7 +96,7 @@ export class ExampleComponent implements OnInit {
 ### App Module Setup:
 
 ``` 
-import {UploaderModule} from 'angular-upload-files'; 
+import {SimpleUploaderModule} from 'angular-upload-files'; 
 ```
 
 ``` 
@@ -115,7 +107,7 @@ import {UploaderModule} from 'angular-upload-files';
   imports: [
     BrowserModule,
     FormsModule,
-    UploaderModule.forRoot(), // <---------------
+    SimpleUploaderModule.forRoot(), // <---------------
     HttpClientModule,
     RouterModule.forRoot(Routes) 
   ],
@@ -182,12 +174,6 @@ example:
 | buttonClass: string | Set class value. like: "btn btn-primary" |
 | id: number | Set uploader id |
 | postUrl: string | Uploader target url |
-| usingImages: boolean |  Set to true if images (and only images) are being uploaded. |
-| showImagesOnAdd: boolean | If usingImages is set to true, images will show in the DOM on add  |
-| imageWidth: string | CSS width value. like: "180px"  |
-| imagesRemovable: boolean | Images can be removed. |
-| imageRemoveType: string |  'clickOnImage' OR 'clickOnX' |
-| imageContainerDisplay: string | CSS display property for image container: eg. 'inline', 'inline-block' |
 
 
 
@@ -197,7 +183,6 @@ example:
 | --- | --- |
 | (onFilesSelected) | event containing {files: files} OR {files: files, base64s: base64ImgUrls} based on 'usingImages' |
 | (onUploadComplete) | Event fired on each upload completion containing {response: event, file: file} |
-| (onImageRemoved) | Event fired when when you remove an image (usingIMages mode)  |
 
 
 ### Triggering events from your component:
@@ -205,16 +190,12 @@ example:
 | Event | Description |
 | --- | --- |
 | Start Upload | ``` this.uploadService.startUpload.next(files) ``` |
-| Remove Image | ``` this.uploadService.removeImage.next(index: file/image index}) ``` |
-| Clear Images |  ``` this.uploadService.clearImages.next({})``` |
 
 ### Triggering events from your component: (MULTIPLE UPLOADERS)
 
 | Event | Description |
 | --- | --- |
 | Start Upload | ``` this.uploadService.startUpload.next(files) ``` |
-| Remove Image | ``` this.uploadService.removeImage.next({id: componentId, index: file/image index}) ``` |
-| Clear Images |  ``` this.uploadService.clearImages.next({id: componentId}) ||  this.uploadService.clearImages.next({})``` |
 
 
 NOTE: You may omit the componentId but all uploaders will receive the sent event if you do so.
@@ -232,4 +213,4 @@ this.uploadService.currentUploadProgress.subscribe(
 
 # DEMO
 
-https://angular-w4tx91.stackblitz.io
+Coming Soon

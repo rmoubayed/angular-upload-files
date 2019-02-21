@@ -1,4 +1,4 @@
-import { UploaderModule } from './uploader/uploader/uploader.module';
+import { SimpleUploaderModule } from './uploader/uploader/uploader.module';
 import { UploadService } from './uploader/uploader/upload.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, PipeTransform } from '@angular/core'; 
@@ -19,7 +19,7 @@ import { Routes } from './app.routes';
   imports: [
     BrowserModule,
     FormsModule,
-    UploaderModule.forRoot(),
+    SimpleUploaderModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(Routes)
   ],

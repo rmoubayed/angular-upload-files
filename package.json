@@ -1,6 +1,6 @@
 {
-  "name": "angular-upload-files",
-  "version": "1.5.1",
+  "name": "ngx-simple-uploader",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
